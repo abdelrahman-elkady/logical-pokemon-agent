@@ -66,7 +66,7 @@ public class Main {
 			if (i + 1 < args.length)
 				format.append("%d, ");
 			else
-				format.append("%d)\n");
+				format.append("%d).\n");
 		}
 		pw.append(String.format(format.toString(), args));
 	}

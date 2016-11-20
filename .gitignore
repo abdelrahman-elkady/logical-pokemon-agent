@@ -1,1 +1,4 @@
 *.class
+
+# Ingore Java KB output file
+kb.out
