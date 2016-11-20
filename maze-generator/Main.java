@@ -1,10 +1,15 @@
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the width and height of the maze:");
+		int width = sc.nextInt();
+		int height = sc.nextInt();
 		PrintWriter pw = new PrintWriter(new File("kb.out"));
-		Maze maze = new Maze(3, 3);
+		Maze maze = new Maze(width, height);
 		StringBuffer sb = maze.printMaze(maze.getStartLocation(), false, true);
 		pw.append("%!Generated maze:\n\n");
 		pw.append(sb);
