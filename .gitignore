@@ -2,3 +2,6 @@
 
 # Ingore Java KB output file
 kb.out
+
+# Ignoring vi swap files
+*.swp
