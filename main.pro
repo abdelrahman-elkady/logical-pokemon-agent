@@ -53,26 +53,26 @@ result(_, s0).
 
 at(X,Y,ORIENT, result(A, S)):-
 
-  at(X_0, Y_0, S),
+  at(X_0, Y_0, ORIENT, S),
   A=forward,
-  
+
   (
-  ORIENT=n,
+  ORIENT==n,
   Y is Y_0 - 1,
   X = X_0
   );
   (
-  ORIENT=s,
+  ORIENT==s,
   Y is Y_0 + 1,
   X = X_0
   );
   (
-  ORIENT=e,
+  ORIENT==e,
   Y = Y_0,
   X is X_0 + 1
   );
   (
-  ORIENT=w,
+  ORIENT==w,
   Y = Y_0,
   X is X_0 - 1
   ).
