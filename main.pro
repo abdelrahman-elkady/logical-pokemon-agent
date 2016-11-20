@@ -47,7 +47,7 @@ hasWestWall(0, 2).
 
 % ------------- Inference Rules -------------
 
-at(1, 1, n, result(A,s0) ).
+at(1, 1, n, s0 ).
 
 result(_, s0).
 
