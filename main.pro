@@ -147,10 +147,10 @@ agent(ROW, COL, ORIENT, POKEMONS, GRABBED, REM_TIME,result(A, S)):-
 
   ).
 
-goal_state(REM_TIME, GRAPPED, S):-
+goal_state(REM_TIME, GRABBED, S):-
   agent(ROW_0, COL_0, _, POKEMONS_0, GRABBED_0, REM_TIME_0, S_0),
   end_location(ROW_0,COL_0),
   pokemon_count(POKEMONS_0),
   REM_TIME = REM_TIME_0,
-  GRAPPED = GRAPPED_0,
+  GRABBED = GRABBED_0,
   S = S_0.
