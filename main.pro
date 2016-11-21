@@ -56,22 +56,23 @@ in_bounds(X,Y):-
 % ------------- Inference Rules -------------
 
 
-at(0, 0, e, s0 ).
+agent(0, 0, e, 0, s0 ).
 
-at(X,Y,ORIENT, result(A, S)):-
+agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
 
-  at(X_0, Y_0, ORIENT_0, S),
+  agent(X_0, Y_0, ORIENT_0, POKEMONS_0, S),
 
   (
     (
       A=forward,
       ORIENT_0 = ORIENT,
+      POKEMONS_0 = POKEMONS,
       (
 
-      ( ORIENT==n, Y is Y_0 - 1, X = X_0, in_bounds(X,Y), \+has_south_wall(X, Y));
-      ( ORIENT==s, Y is Y_0 + 1, X = X_0, in_bounds(X,Y), \+has_north_wall(X, Y));
-      ( ORIENT==e, Y = Y_0, X is X_0 + 1, in_bounds(X,Y), \+has_west_wall(X, Y));
-      ( ORIENT==w, Y = Y_0, X is X_0 - 1, in_bounds(X,Y), \+has_east_wall(X, Y))
+      ( ORIENT==n, Y is Y_0 - 1, X = X_0, in_bounds(X,Y), \+has_north_wall(X_0, Y_0));
+      ( ORIENT==s, Y is Y_0 + 1, X = X_0, in_bounds(X,Y), \+has_south_wall(X_0, Y_0));
+      ( ORIENT==e, Y = Y_0, X is X_0 + 1, in_bounds(X,Y), \+has_east_wall(X_0, Y_0));
+      ( ORIENT==w, Y = Y_0, X is X_0 - 1, in_bounds(X,Y), \+has_west_wall(X_0, Y_0))
 
       )
     );
@@ -81,6 +82,7 @@ at(X,Y,ORIENT, result(A, S)):-
       A=rotate_right,
       X_0 = X,
       Y_0 = Y,
+      POKEMONS_0 = POKEMONS,
       (
 
       ( ORIENT=n, ORIENT_0=w );
@@ -97,6 +99,7 @@ at(X,Y,ORIENT, result(A, S)):-
       A=rotate_left,
       X_0 = X,
       Y_0 = Y,
+      POKEMONS_0 = POKEMONS,
       (
 
       ( ORIENT=n, ORIENT_0=e );
@@ -106,13 +109,24 @@ at(X,Y,ORIENT, result(A, S)):-
 
       )
 
+    );
+
+    (
+
+      A=grap,
+      X_0 = X,
+      Y_0 = Y,
+      has_pokemon(X_0, Y_0),
+      POKEMONS is POKEMONS_0 + 1
+
     )
+
   ).
 
 
 
 
   % Y_0 is Y - 1,
-  % at(X, Y_0, S),
+  % agent(X, Y_0, S),
   % A=forward,
   % ORIENT=n,
