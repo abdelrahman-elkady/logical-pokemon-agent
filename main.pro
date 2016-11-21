@@ -44,15 +44,17 @@ has_west_wall(0, 1).
 has_west_wall(1, 1).
 has_west_wall(0, 2).
 
-% ------------- End Generated Maze -------------
-
+% ------------- Helpers -------------
+in_bounds(X,Y):-
+  max_x(X_MAX),
+  max_y(Y_MAX),
+  X >= 0,
+  X < X_MAX,
+  Y >= 0,
+  Y < Y_MAX.
 
 % ------------- Inference Rules -------------
-inBounds(X,Y):-
-  X >= 0,
-  X < 3,
-  Y >= 0,
-  Y < 3.
+
 
 at(0, 0, s, s0 ).
 
