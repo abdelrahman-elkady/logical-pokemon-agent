@@ -56,7 +56,7 @@ in_bounds(X,Y):-
 % ------------- Inference Rules -------------
 
 
-at(0, 0, s, s0 ).
+at(0, 0, e, s0 ).
 
 at(X,Y,ORIENT, result(A, S)):-
 
@@ -65,10 +65,10 @@ at(X,Y,ORIENT, result(A, S)):-
 
   (
 
-  ( ORIENT==n, Y is Y_0 - 1, X = X_0, inBounds(X,Y));
-  ( ORIENT==s, Y is Y_0 + 1, X = X_0, inBounds(X,Y));
-  ( ORIENT==e, Y = Y_0, X is X_0 + 1, inBounds(X,Y));
-  ( ORIENT==w, Y = Y_0, X is X_0 - 1, inBounds(X,Y))
+  ( ORIENT==n, Y is Y_0 - 1, X = X_0, in_bounds(X,Y), \+has_south_wall(X, Y));
+  ( ORIENT==s, Y is Y_0 + 1, X = X_0, in_bounds(X,Y), \+has_north_wall(X, Y));
+  ( ORIENT==e, Y = Y_0, X is X_0 + 1, in_bounds(X,Y), \+has_west_wall(X, Y));
+  ( ORIENT==w, Y = Y_0, X is X_0 - 1, in_bounds(X,Y), \+has_east_wall(X, Y))
 
   ).
 
