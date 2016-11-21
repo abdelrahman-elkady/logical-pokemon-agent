@@ -9,19 +9,25 @@ public class Main {
 		int width = sc.nextInt();
 		int height = sc.nextInt();
 		PrintWriter pw = new PrintWriter(new File("kb.out"));
+
 		Maze maze = new Maze(width, height);
 		StringBuffer sb = maze.printMaze(maze.getStartLocation(), false, true);
 		pw.append("%!Generated maze:\n\n");
 		pw.append(sb);
 		pw.append("\n\n\n");
-		appendPredicate("startLocation", pw, maze.getStartLocation().getY(),
+
+
+		appendPredicate("max_x", pw, width);
+		appendPredicate("max_y", pw, height);
+
+		appendPredicate("start_location", pw, maze.getStartLocation().getY(),
 				maze.getStartLocation().getX());
-		appendPredicate("endLocation", pw, maze.getEndLocation().getY(), maze
+		appendPredicate("end_location", pw, maze.getEndLocation().getY(), maze
 				.getEndLocation().getX());
 		pw.append("\n");
 
 		for (Cell cell : maze.getPokemonCells()) {
-			appendPredicate("hasPokemon", pw, cell.getLocation().getY(), cell
+			appendPredicate("has_pokemon", pw, cell.getLocation().getY(), cell
 					.getLocation().getX());
 		}
 		pw.append("\n");
@@ -31,22 +37,22 @@ public class Main {
 				boolean line = false;
 				Cell c = maze.getCellByLocation(i, j);
 				if (maze.getNorthWalls()[i][j]) {
-					appendPredicate("hasNorthWall", pw, c.getLocation().getY(),
+					appendPredicate("has_north_wall", pw, c.getLocation().getY(),
 							c.getLocation().getX());
 					line = true;
 				}
 				if (maze.getSouthWalls()[i][j]) {
-					appendPredicate("hasSouthWall", pw, c.getLocation().getY(),
+					appendPredicate("has_south_wall", pw, c.getLocation().getY(),
 							c.getLocation().getX());
 					line = true;
 				}
 				if (maze.getEastWalls()[i][j]) {
-					appendPredicate("hasEastWall", pw, c.getLocation().getY(),
+					appendPredicate("has_east_wall", pw, c.getLocation().getY(),
 							c.getLocation().getX());
 					line = true;
 				}
 				if (maze.getWestWalls()[i][j]) {
-					appendPredicate("hasWestWall", pw, c.getLocation().getY(),
+					appendPredicate("has_west_wall", pw, c.getLocation().getY(),
 							c.getLocation().getX());
 					line = true;
 				}
