@@ -15,6 +15,9 @@
 
 max_x(3).
 max_y(3).
+
+hatch_time(3).
+
 start_location(1, 1).
 end_location(0, 0).
 
@@ -57,7 +60,7 @@ in_bounds(ROW,COL):-
 
 % ------------- Inference Rules -------------
 
-agent(0, 0, e, 0, s0 ).
+agent(1, 1, n, 0, s0 ).
 
 agent(ROW, COL, ORIENT, POKEMONS, result(A, S)):-
 

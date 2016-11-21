@@ -19,7 +19,9 @@ public class Main {
 
 		appendPredicate("max_x", pw, width);
 		appendPredicate("max_y", pw, height);
-
+		pw.append("\n");
+		appendPredicate("hatch_time", pw, maze.getEggHatchingInterval());
+		pw.append("\n");
 		appendPredicate("start_location", pw, maze.getStartLocation().getY(),
 				maze.getStartLocation().getX());
 		appendPredicate("end_location", pw, maze.getEndLocation().getY(), maze

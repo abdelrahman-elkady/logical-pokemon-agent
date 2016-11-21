@@ -13,6 +13,9 @@
 
 max_x(3).
 max_y(3).
+
+hatch_time(3).
+
 start_location(0, 1).
 end_location(2, 2).
 
