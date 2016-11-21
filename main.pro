@@ -45,22 +45,21 @@ has_west_wall(1, 1).
 has_west_wall(0, 2).
 
 % ------------- Helpers -------------
-in_bounds(X,Y):-
-  max_x(X_MAX),
-  max_y(Y_MAX),
-  X >= 0,
-  X < X_MAX,
-  Y >= 0,
-  Y < Y_MAX.
+in_bounds(ROW,COL):-
+  max_x(ROW_MAX),
+  max_y(COL_MAX),
+  ROW >= 0,
+  ROW < ROW_MAX,
+  COL >= 0,
+  COL < COL_MAX.
 
 % ------------- Inference Rules -------------
 
-
 agent(0, 0, e, 0, s0 ).
 
-agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
+agent(ROW, COL, ORIENT, POKEMONS, result(A, S)):-
 
-  agent(X_0, Y_0, ORIENT_0, POKEMONS_0, S),
+  agent(ROW_0, COL_0, ORIENT_0, POKEMONS_0, S),
 
   (
     (
@@ -69,10 +68,10 @@ agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
       POKEMONS_0 = POKEMONS,
       (
 
-      ( ORIENT==n, Y is Y_0 - 1, X = X_0, in_bounds(X,Y), \+has_north_wall(X_0, Y_0));
-      ( ORIENT==s, Y is Y_0 + 1, X = X_0, in_bounds(X,Y), \+has_south_wall(X_0, Y_0));
-      ( ORIENT==e, Y = Y_0, X is X_0 + 1, in_bounds(X,Y), \+has_east_wall(X_0, Y_0));
-      ( ORIENT==w, Y = Y_0, X is X_0 - 1, in_bounds(X,Y), \+has_west_wall(X_0, Y_0))
+      ( ORIENT==n, ROW is ROW_0 - 1, COL = COL_0, in_bounds(ROW,COL), \+has_north_wall(ROW_0, COL_0));
+      ( ORIENT==s, ROW is ROW_0 + 1, COL = COL_0, in_bounds(ROW,COL), \+has_south_wall(ROW_0, COL_0));
+      ( ORIENT==e, ROW = ROW_0, COL is COL_0 + 1, in_bounds(ROW,COL), \+has_east_wall(ROW_0, COL_0));
+      ( ORIENT==w, ROW = ROW_0, COL is COL_0 - 1, in_bounds(ROW,COL), \+has_west_wall(ROW_0, COL_0))
 
       )
     );
@@ -80,8 +79,8 @@ agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
     (
 
       A=rotate_right,
-      X_0 = X,
-      Y_0 = Y,
+      ROW_0 = ROW,
+      COL_0 = COL,
       POKEMONS_0 = POKEMONS,
       (
 
@@ -97,8 +96,8 @@ agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
     (
 
       A=rotate_left,
-      X_0 = X,
-      Y_0 = Y,
+      ROW_0 = ROW,
+      COL_0 = COL,
       POKEMONS_0 = POKEMONS,
       (
 
@@ -114,9 +113,11 @@ agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
     (
 
       A=grab,
-      X_0 = X,
-      Y_0 = Y,
-      has_pokemon(X_0, Y_0),
+      ROW_0 = ROW,
+      COL_0 = COL,
+      %(\+current_predicate(taken/2);\+taken(ROW_0, COL_0)),
+      has_pokemon(ROW_0, COL_0),
+      %assert(taken(ROW_0, COL_0)),
       POKEMONS is POKEMONS_0 + 1
 
     )
@@ -126,7 +127,7 @@ agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
 
 
 
-  % Y_0 is Y - 1,
-  % agent(X, Y_0, S),
+  % COL_0 is COL - 1,
+  % agent(ROW, COL_0, S),
   % A=forward,
   % ORIENT=n,
