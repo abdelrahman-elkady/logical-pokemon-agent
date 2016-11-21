@@ -27,6 +27,8 @@ public class Main {
 		appendPredicate("end_location", pw, maze.getEndLocation().getY(), maze
 				.getEndLocation().getX());
 		pw.append("\n");
+		appendPredicate("pokemon_count", pw, maze.getPokemonCells().size());
+		pw.append("\n");
 
 		for (Cell cell : maze.getPokemonCells()) {
 			appendPredicate("has_pokemon", pw, cell.getLocation().getY(), cell

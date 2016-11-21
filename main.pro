@@ -21,6 +21,8 @@ hatch_time(3).
 start_location(1, 1).
 end_location(0, 0).
 
+pokemon_count(2).
+
 has_pokemon(2, 2).
 has_pokemon(0, 1).
 
@@ -144,3 +146,11 @@ agent(ROW, COL, ORIENT, POKEMONS, GRABBED, REM_TIME,result(A, S)):-
     )
 
   ).
+
+goal_state(REM_TIME, GRAPPED, S):-
+  agent(ROW_0, COL_0, _, POKEMONS_0, GRABBED_0, REM_TIME_0, S_0),
+  end_location(ROW_0,COL_0),
+  pokemon_count(POKEMONS_0),
+  REM_TIME = REM_TIME_0,
+  GRAPPED = GRAPPED_0,
+  S = S_0.

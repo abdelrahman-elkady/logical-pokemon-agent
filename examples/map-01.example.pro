@@ -21,6 +21,8 @@ hatch_time(3).
 start_location(1, 1).
 end_location(0, 0).
 
+pokemon_count(2).
+
 has_pokemon(2, 2).
 has_pokemon(0, 1).
 
