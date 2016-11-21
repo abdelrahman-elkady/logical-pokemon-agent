@@ -90,6 +90,22 @@ at(X,Y,ORIENT, result(A, S)):-
 
       )
 
+    );
+
+    (
+
+      A=rotate_left,
+      X_0 = X,
+      Y_0 = Y,
+      (
+
+      ( ORIENT=n, ORIENT_0=e );
+      ( ORIENT=s, ORIENT_0=w );
+      ( ORIENT=e, ORIENT_0=s );
+      ( ORIENT=w, ORIENT_0=n )
+
+      )
+
     )
   ).
 
