@@ -62,7 +62,7 @@ add_tail([H|T],X,[H|L]):-add_tail(T,X,L).
 
 % ------------- Inference Rules -------------
 
-agent(0, 0, e, 0, [], s0 ).
+agent(1, 1, n, 0, [], s0 ).
 
 agent(ROW, COL, ORIENT, POKEMONS, GRABBED, result(A, S)):-
 
