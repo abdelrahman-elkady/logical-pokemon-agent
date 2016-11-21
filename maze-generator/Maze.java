@@ -155,17 +155,17 @@ public class Maze {
 	}
 
 	public boolean canMove(Location location, ORIENTATION orientation) {
-		int x = location.getX();
-		int y = location.getY();
+		int col = location.getX();
+		int row = location.getY();
 		switch (orientation) {
 		case NORTH:
-			return !northWalls[y][x];
+			return !northWalls[row][col];
 		case SOUTH:
-			return !southWalls[y][x];
+			return !southWalls[row][col];
 		case EAST:
-			return !eastWalls[y][x];
+			return !eastWalls[row][col];
 		case WEST:
-			return !westWalls[y][x];
+			return !westWalls[row][col];
 		default:
 			break;
 		}
@@ -240,8 +240,8 @@ public class Maze {
 		return this.maze[location.getY()][location.getX()];
 	}
 
-	public Cell getCellByLocation(int x, int y) {
-		return this.maze[y][x];
+	public Cell getCellByLocation(int row, int col) {
+		return this.maze[row][col];
 	}
 
 	public boolean[][] getNorthWalls() {
