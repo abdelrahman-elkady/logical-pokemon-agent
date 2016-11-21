@@ -15,9 +15,6 @@
 
 max_x(3).
 max_y(3).
-
-hatch_time(3).
-
 start_location(1, 1).
 end_location(0, 0).
 
@@ -58,19 +55,25 @@ in_bounds(ROW,COL):-
   COL >= 0,
   COL < COL_MAX.
 
+
+add_tail([],X,[X]).
+add_tail([H|T],X,[H|L]):-add_tail(T,X,L).
+
+
 % ------------- Inference Rules -------------
 
-agent(1, 1, n, 0, s0 ).
+agent(0, 0, e, 0, [], s0 ).
 
-agent(ROW, COL, ORIENT, POKEMONS, result(A, S)):-
+agent(ROW, COL, ORIENT, POKEMONS, GRABBED, result(A, S)):-
 
-  agent(ROW_0, COL_0, ORIENT_0, POKEMONS_0, S),
+  agent(ROW_0, COL_0, ORIENT_0, POKEMONS_0, GRABBED_0, S),
 
   (
     (
-      A=forward,
-      ORIENT_0 = ORIENT,
+      A          = forward,
+      ORIENT_0   = ORIENT,
       POKEMONS_0 = POKEMONS,
+      GRABBED_0  = GRABBED,
       (
 
       ( ORIENT==n, ROW is ROW_0 - 1, COL = COL_0, in_bounds(ROW,COL), \+has_north_wall(ROW_0, COL_0));
@@ -83,10 +86,11 @@ agent(ROW, COL, ORIENT, POKEMONS, result(A, S)):-
 
     (
 
-      A=rotate_right,
-      ROW_0 = ROW,
-      COL_0 = COL,
+      A          = rotate_right,
+      ROW_0      = ROW,
+      COL_0      = COL,
       POKEMONS_0 = POKEMONS,
+      GRABBED_0  = GRABBED,
       (
 
       ( ORIENT=n, ORIENT_0=w );
@@ -100,10 +104,11 @@ agent(ROW, COL, ORIENT, POKEMONS, result(A, S)):-
 
     (
 
-      A=rotate_left,
-      ROW_0 = ROW,
-      COL_0 = COL,
+      A          = rotate_left,
+      ROW_0      = ROW,
+      COL_0      = COL,
       POKEMONS_0 = POKEMONS,
+      GRABBED_0  = GRABBED,
       (
 
       ( ORIENT=n, ORIENT_0=e );
@@ -120,19 +125,11 @@ agent(ROW, COL, ORIENT, POKEMONS, result(A, S)):-
       A=grab,
       ROW_0 = ROW,
       COL_0 = COL,
-      %(\+current_predicate(taken/2);\+taken(ROW_0, COL_0)),
       has_pokemon(ROW_0, COL_0),
-      %assert(taken(ROW_0, COL_0)),
+      \+member((ROW_0, COL_0), GRABBED_0),
+      add_tail(GRABBED_0, (ROW_0, COL_0), GRABBED),
       POKEMONS is POKEMONS_0 + 1
 
     )
 
   ).
-
-
-
-
-  % COL_0 is COL - 1,
-  % agent(ROW, COL_0, S),
-  % A=forward,
-  % ORIENT=n,
