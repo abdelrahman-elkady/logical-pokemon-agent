@@ -49,7 +49,7 @@ has_west_wall(0, 2).
 
 % ------------- Inference Rules -------------
 
-at(1, 1, n, s0 ).
+at(1, 1, s, s0 ).
 
 result(_, s0).
 
@@ -59,24 +59,12 @@ at(X,Y,ORIENT, result(A, S)):-
   A=forward,
 
   (
-  ORIENT==n,
-  Y is Y_0 - 1,
-  X = X_0
-  );
-  (
-  ORIENT==s,
-  Y is Y_0 + 1,
-  X = X_0
-  );
-  (
-  ORIENT==e,
-  Y = Y_0,
-  X is X_0 + 1
-  );
-  (
-  ORIENT==w,
-  Y = Y_0,
-  X is X_0 - 1
+
+  ( ORIENT==n, Y is Y_0 - 1, X = X_0 );
+  ( ORIENT==s, Y is Y_0 + 1, X = X_0 );
+  ( ORIENT==e, Y = Y_0, X is X_0 + 1 );
+  ( ORIENT==w, Y = Y_0, X is X_0 - 1 )
+
   ).
 
 
