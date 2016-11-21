@@ -113,7 +113,7 @@ agent(X, Y, ORIENT, POKEMONS, result(A, S)):-
 
     (
 
-      A=grap,
+      A=grab,
       X_0 = X,
       Y_0 = Y,
       has_pokemon(X_0, Y_0),
