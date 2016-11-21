@@ -48,10 +48,13 @@ has_west_wall(0, 2).
 
 
 % ------------- Inference Rules -------------
+inBounds(X,Y):-
+  X >= 0,
+  X < 3,
+  Y >= 0,
+  Y < 3.
 
-at(1, 1, s, s0 ).
-
-result(_, s0).
+at(0, 0, s, s0 ).
 
 at(X,Y,ORIENT, result(A, S)):-
 
@@ -60,10 +63,10 @@ at(X,Y,ORIENT, result(A, S)):-
 
   (
 
-  ( ORIENT==n, Y is Y_0 - 1, X = X_0 );
-  ( ORIENT==s, Y is Y_0 + 1, X = X_0 );
-  ( ORIENT==e, Y = Y_0, X is X_0 + 1 );
-  ( ORIENT==w, Y = Y_0, X is X_0 - 1 )
+  ( ORIENT==n, Y is Y_0 - 1, X = X_0, inBounds(X,Y));
+  ( ORIENT==s, Y is Y_0 + 1, X = X_0, inBounds(X,Y));
+  ( ORIENT==e, Y = Y_0, X is X_0 + 1, inBounds(X,Y));
+  ( ORIENT==w, Y = Y_0, X is X_0 - 1, inBounds(X,Y))
 
   ).
 
