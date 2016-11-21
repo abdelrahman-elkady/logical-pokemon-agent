@@ -79,13 +79,14 @@ at(X,Y,ORIENT, result(A, S)):-
     (
 
       A=rotate_right,
-
+      X_0 = X,
+      Y_0 = Y,
       (
 
-      ( ORIENT==n, ORIENT_0=w );
-      ( ORIENT==s, ORIENT_0=e );
-      ( ORIENT==e, ORIENT_0=n );
-      ( ORIENT==w, ORIENT_0=s )
+      ( ORIENT=n, ORIENT_0=w );
+      ( ORIENT=s, ORIENT_0=e );
+      ( ORIENT=e, ORIENT_0=n );
+      ( ORIENT=w, ORIENT_0=s )
 
       )
 
